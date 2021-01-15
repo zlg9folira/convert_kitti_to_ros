@@ -1,5 +1,5 @@
 # kitti2pcl
-This software converts Velodyne Kitti point cloud to PCD files. 
+This software converts Velodyne Kitti point cloud data (http://www.cvlibs.net/datasets/kitti/raw_data.php) to PCD files. 
 
 Build:
 ```
