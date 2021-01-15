@@ -11,6 +11,6 @@ $ make
 
 Usage:
 ```
-$ ./velo2pcd --folder /DIR/TO/KITTI/velodyne_points/data --outpath /DIR/TO/OUTPUT/FOLDER/pcd_ascii -a
+$ ./kitti2ros --folder /DIR/TO/KITTI/velodyne_points/data --outpath /DIR/TO/OUTPUT/FOLDER/pcd_ascii -a
 
 ```
