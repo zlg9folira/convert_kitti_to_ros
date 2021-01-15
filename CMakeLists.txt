@@ -14,8 +14,8 @@ add_definitions(${PCL_DEFINITIONS})
 
 MESSAGE("${Boost_LIBRARIES}")
 include_directories(include ${catkin_INCLUDE_DIRS})
-add_executable(pcd2ros src/pcd2ros.cpp)
+add_executable(pcd2bag src/pcd2bag.cpp)
 add_executable(kitti2pcd src/kitti2pcd.cpp)
-target_link_libraries(pcd2ros ${catkin_LIBRARIES})
+target_link_libraries(pcd2bag ${catkin_LIBRARIES})
 target_link_libraries(kitti2pcd  ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${Boost_LIBRARIES} libboost_program_options.a)
 
