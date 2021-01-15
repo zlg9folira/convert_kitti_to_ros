@@ -17,5 +17,5 @@ Converts Velodyne Kitti point cloud dataset to PCD files (binary or ascii output
 Converts and writes PCD files (ascii) into ROSBAG file. At the same time, it publishes point cloud topic to be visualized in rviz. Note that, the publish frame rate depends on how fast the PCD files are being read from filesystem, however, the ROSBAG is created based on 10Hz frame rate.
 ### Usage:
 ```
- rosrun convert_kitti_to_ros pcd2bag --folder /PATH/TO/INPUT/FOLDER/velodyne_points/pcd_ascii --outpath /PATH/TO/OUTPUT/ROSBAG/velodyne_points//kitti.bag
+ rosrun convert_kitti_to_ros pcd2bag --folder /PATH/TO/INPUT/FOLDER/velodyne_points/pcd_ascii --outpath /PATH/TO/OUTPUT/ROSBAG/velodyne_points/kitti.bag
 ```
