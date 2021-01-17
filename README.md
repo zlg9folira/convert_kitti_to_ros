@@ -1,6 +1,8 @@
 # Kitti to ROS
 This ROS PACKAGE provides two nodes for dealing with KITTI point clouds (http://www.cvlibs.net/datasets/kitti/raw_data.php). One node converts the Kitti `bin` point cloud (single or multi) to user-specified `pcd` format. The second node converts `pcd` files to ROS `bag` format given `frame_rate`, `topic_name` and `frame_name`.
 
+![kitti](https://user-images.githubusercontent.com/35779029/104856972-5a419500-58e3-11eb-9244-8e9c50048a65.gif)
+
 ### Requirements:
 ```
 CMake 3.2
