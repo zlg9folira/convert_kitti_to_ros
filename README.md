@@ -23,6 +23,7 @@ Converts Velodyne Kitti point cloud dataset to PCD files (binary or ascii output
 ```
 Kitti2pcd command line options are:
 ```
+   --help or -h:     "list command line help options"
    --ascii or -a:    "save pcd as ASCII code. Default is binary"
    --file or -s:     "single file. e.g. --file PCD_0001.bin"
    --folder or -d:   "entire folder. e.g. --folder /home/data/velodyne"
@@ -35,4 +36,10 @@ Converts and writes PCD files (ascii) into ROSBAG file. At the same time, it pub
 ### Usage:
 ```
  rosrun convert_kitti_to_ros pcd2bag --folder /PATH/TO/INPUT/FOLDER/velodyne_points/pcd_ascii --outpath /PATH/TO/OUTPUT/ROSBAG/velodyne_points/kitti.bag
+```
+Kitti2pcd command line options are:
+```
+   --help or -h:     "list command line help options"
+   --folder or -d:   "entire folder. e.g. --folder /home/data/velodyne"
+   --outpath or -o": "path to where pcd files are saved. e.g. --outpath /home/data/out"
 ```
