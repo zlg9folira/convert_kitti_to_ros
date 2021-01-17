@@ -1,4 +1,4 @@
-# Convert Kitti to ROS
+# Kitti to ROS
 This ROS PACKAGE provides two nodes for dealing with KITTI point clouds (http://www.cvlibs.net/datasets/kitti/raw_data.php). 
 
 ### Build:
