@@ -1,4 +1,4 @@
-//* To run:  rosrun convert_pcd_to_ros pcd2ros
+//* run help:  rosrun convert_pcd_to_ros pcd2bag --help
 #include "ros/ros.h"
 #include <iostream>
 #include <std_msgs/Float64.h>
@@ -65,19 +65,19 @@ int main(int argc, char** argv)
 			show_usage();
 			return 0;
 		}else if ((arg == "-f") || (arg == "--folder")) {
-			if (i + 1 < argc) { // Make sure we aren't at the end of argv!
-				folder = argv[++i]; // Increment 'i' so we don't get the argument as the next argv[i].
+			if (i + 1 < argc) { 
+				folder = argv[++i];
 				printf("Input folder:\t%s\n",folder.c_str());
-			} else { // Uh-oh, there was no argument to the destination option.
+			} else { 
 				std::cerr << "--folder option requires one argument." << std::endl;
 				return 1;
 			}  
 
 		}else if ((arg == "-o") || (arg == "--outpath")) {
-			if (i + 1 < argc) { // Make sure we aren't at the end of argv!
-				bagfile = argv[++i]; // Increment 'i' so we don't get the argument as the next argv[i].
-				printf("Output BAG:\t%s\n",bagfile.c_str());
-			} else { // Uh-oh, there was no argument to the destination option.
+			if (i + 1 < argc) { 
+				bagfile = argv[++i]; 
+				// printf("Output BAG:\t%s\n",bagfile.c_str());
+			} else { 
 				std::cerr << "--outpath option requires one argument." << std::endl;
 				return 1;
 			}  
@@ -88,7 +88,11 @@ int main(int argc, char** argv)
 	}
 
 
-	// initialise the node
+	// initialise the node for cuncurrent visualization. 
+	// **** NOTE **** : The ROSBAG will store frames at a frame rate based on variable "sensor_rate".
+	//		    The publish rate during program execution could be slower as PCD files are loaded.
+	// 		    Make sure to set "sensor_rate" 10Hz following Kitti setting.
+	
 	ros::init(argc, argv, "pcd2ros"); // name of node
 	std::cout << "pcd2ros node initialized" << std::endl;
 	ros::NodeHandle nh;
@@ -101,39 +105,41 @@ int main(int argc, char** argv)
 	// handle ROS communication events
 	ros::Rate loop_rate(1);
 
-
-	// make a loop over all input PCD files
 	std::string globVector_files = folder + "/*";
 	std::vector<std::string> files = globVector(globVector_files);
-	std::cout<< "\nsize of files: " << files.size() << std::endl;
-	double time = ros::Time::now().toSec(); 
-	ros::Time stamp =   ros::Time::now();   
+	std::cout<< "\nNumber of PCD files: " << files.size() << std::endl;
+	// double time = ros::Time::now().toSec(); 
+	ros::Time stamp = ros::Time::now(); 
+	
+	// initiate a loop over all input PCD files in the folder 
 	for (int j=1;j<files.size();j++){
 		std::string pose3PcdName = files[j];
 		std::string pose3Pcd =  pose3PcdName;
 		pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud;
-
+		// load a PCD file into memory
 		read_pcd_to_cloud(pose3Pcd,input_cloud);
 
-		sensor_msgs::PointCloud2 myCloud2;
-		//pcl_conversions::fromPCL(*input_cloud,myCloud2);
-		pcl::toROSMsg(*input_cloud,myCloud2);
+		sensor_msgs::PointCloud2 output_cloud;
+		pcl::toROSMsg(*input_cloud,output_cloud);
 		// Publish the data
-		myCloud2.header.frame_id= frame_name;
+		output_cloud.header.frame_id= frame_name;
 		ros::Duration delta_t (0, sensor_rate/0.0000001);
 		stamp += delta_t; 
-		myCloud2.header.stamp = stamp;
+		output_cloud.header.stamp = stamp;
 
-		publisher.publish (myCloud2);
-		bag.write(topic_name,myCloud2.header.stamp,myCloud2);
+		publisher.publish (output_cloud);
+		bag.write(topic_name,output_cloud.header.stamp,output_cloud);
 		ros::spinOnce();
 		std::cout << "count:\t" << count << "/" << files.size() << "\tCloud size: " 
 			  << input_cloud->points.size() << " points" << std::setprecision (25)
-			  << " timestamp:" << myCloud2.header.stamp << std::endl;
+			  << " timestamp:" << output_cloud.header.stamp << std::endl;
 		count++;
 	}
 	bag.close();
-	std::cout<< "Bag file write finish"<< std::endl;
+	std::cout << "ROSBAG file write successfully finished !\n" 
+		  << "BAG:\t" << bagfile.c_str() << "\n"
+		  << "Topic:\t" << topic_name << "\n"
+		  << "Frame:\t" << frame_name << std::endl;
 	return 1;
 }
 
