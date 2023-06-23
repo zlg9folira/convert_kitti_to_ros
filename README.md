@@ -41,9 +41,15 @@ Converts and writes PCD files (ascii) into ROSBAG file. At the same time, it pub
 ```
  rosrun convert_kitti_to_ros pcd2bag --folder /PATH/TO/INPUT/FOLDER/velodyne_points/pcd_ascii --outpath /PATH/TO/OUTPUT/ROSBAG/velodyne_points/kitti.bag
 ```
+
 pcd2bag command line options are:
 ```
    --help or -h:     "list command line help options"
    --folder or -d:   "entire folder. e.g. --folder /home/data/velodyne"
    --outpath or -o": "path to where pcd files are saved. e.g. --outpath /home/data/out"
 ```
+
+### Contributions
+Foad Hajiaghajani @UB Lab for Connected and Autonomous Vehicles and Applications (CAVAS)
+https://ubwp.buffalo.edu/cavas/
+
