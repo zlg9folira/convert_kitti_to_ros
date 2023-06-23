@@ -1,3 +1,16 @@
+/**
+ *  Developed and maintained by:
+ *  	Foad Hajiaghajani
+ *  	foadhaji [at] buffalo.edu
+ *
+ *  Industry:
+ *  	Connected and Self-driving Car Applications and Systems (Research)
+ *
+ *  Build & Install:
+ *  	Refer to README file
+ *	All files are subject to further change or update..
+ */
+
 //* run help:  rosrun convert_pcd_to_ros pcd2bag --help
 #include "ros/ros.h"
 #include <iostream>
