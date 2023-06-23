@@ -1,3 +1,16 @@
+/**
+ *  Developed and maintained by:
+ *  	Foad Hajiaghajani
+ *  	foadhaji [at] buffalo.edu
+ *
+ *  Industry:
+ *  	Connected and Self-driving Car Applications and Systems (Research)
+ *
+ *  Build & Install:
+ *  	Refer to README file
+ *	All files are subject to further change or update..
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
